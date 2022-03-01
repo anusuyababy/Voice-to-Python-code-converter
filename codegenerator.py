@@ -8,11 +8,6 @@ Created on Sat Feb 26 11:47:21 2022
 import numpy as np
 import pandas as pd
 import os
-import matplotlib.pyplot as plt
-import seaborn as sns
-import operator
-import re
-import dtale
 from IPython.display import display
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
