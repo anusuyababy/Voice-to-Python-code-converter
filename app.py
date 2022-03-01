@@ -44,7 +44,7 @@ df.to_csv('salary.csv', index=None)
 def index():
    return render_template('index.html')
 
-@app.route('/result',methods = ['POST', 'GET'])
+@app.route('/result',methods = ['POST'])
 def result():
    if request.method == 'POST':
        df = pd.read_csv('salary.csv')
