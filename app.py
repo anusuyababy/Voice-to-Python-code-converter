@@ -11,11 +11,8 @@ from flask import Flask, render_template
 import numpy as np
 import pandas as pd
 import os
-import matplotlib.pyplot as plt
-import seaborn as sns
 import operator
 import re
-import dtale
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
