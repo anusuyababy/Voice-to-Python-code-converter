@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 """
+Created on Thu Mar  3 19:54:22 2022
+
+@author: kennedy
+"""
+
+# -*- coding: utf-8 -*-
+"""
 Created on Sat Feb 26 11:47:21 2022
 
 @author: kennedy
@@ -373,7 +380,7 @@ def generate_code(query, df):
         for feat in objList:
             df[feat] = le.fit_transform(df[feat].astype(str))
         x = df.iloc[:,:-1]
-        y = df.iloc[: , -1:]
+        y = df.iloc[: , -1:].values
         x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
         # Gaussian naive bayes
         clf = GaussianNB()
@@ -404,7 +411,7 @@ def generate_code(query, df):
         for feat in objList:
             df[feat] = le.fit_transform(df[feat].astype(str))
         x = df.iloc[:,:-1]
-        y = df.iloc[: , -1:]
+        y = df.iloc[: , -1:].values
         x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
         # random forest
         clf1 = RandomForestClassifier(n_estimators=20)
@@ -435,7 +442,7 @@ def generate_code(query, df):
         for feat in objList:
             df[feat] = le.fit_transform(df[feat].astype(str))
         x = df.iloc[:,:-1]
-        y = df.iloc[: , -1:]
+        y = df.iloc[: , -1:].values
         x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
         # KNN CLASSIFIER
         clf2 = KNeighborsClassifier()
@@ -465,7 +472,7 @@ def generate_code(query, df):
         for feat in objList:
             df[feat] = le.fit_transform(df[feat].astype(str))
         x = df.iloc[:,:-1]
-        y = df.iloc[: , -1:]
+        y = df.iloc[: , -1:].values
         x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
         # KNN CLASSIFIER
         clf2 = KNeighborsClassifier()
@@ -495,7 +502,7 @@ def generate_code(query, df):
         for feat in objList:
             df[feat] = le.fit_transform(df[feat].astype(str))
         x = df.iloc[:,:-1]
-        y = df.iloc[: , -1:]
+        y = df.iloc[: , -1:].values
         x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
         # KNN CLASSIFIER
         clf2 = KNeighborsClassifier()
@@ -526,7 +533,7 @@ def generate_code(query, df):
         for feat in objList:
             df[feat] = le.fit_transform(df[feat].astype(str))
         x = df.iloc[:,:-1]
-        y = df.iloc[: , -1:]
+        y = df.iloc[: , -1:].values
         x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
         # Decision tree classifier
         clf3 = DecisionTreeClassifier()
@@ -556,7 +563,7 @@ def generate_code(query, df):
         for feat in objList:
             df[feat] = le.fit_transform(df[feat].astype(str))
         x = df.iloc[:,:-1]
-        y = df.iloc[: , -1:]
+        y = df.iloc[: , -1:].values
         x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
         # Decision tree classifier
         clf3 = DecisionTreeClassifier()
@@ -588,7 +595,7 @@ def generate_code(query, df):
         for feat in objList:
             df[feat] = le.fit_transform(df[feat].astype(str))
         x = df.iloc[:,:-1]
-        y = df.iloc[: , -1:]
+        y = df.iloc[: , -1:].values
         x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
         # SVM Classifier
         clf4 = svm.SVC()
@@ -618,7 +625,7 @@ def generate_code(query, df):
         for feat in objList:
             df[feat] = le.fit_transform(df[feat].astype(str))
         x = df.iloc[:,:-1]
-        y = df.iloc[: , -1:]
+        y = df.iloc[: , -1:].values
         x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
         # SVM Classifier
         clf4 = svm.SVC()
@@ -648,7 +655,7 @@ def generate_code(query, df):
         for feat in objList:
             df[feat] = le.fit_transform(df[feat].astype(str))
         x = df.iloc[:,:-1]
-        y = df.iloc[: , -1:]
+        y = df.iloc[: , -1:].values
         x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
         # SVM Classifier
         clf4 = svm.SVC()
@@ -679,7 +686,7 @@ def generate_code(query, df):
         for feat in objList:
             df[feat] = le.fit_transform(df[feat].astype(str))
         x = df.iloc[:,:-1]
-        y = df.iloc[: , -1:]
+        y = df.iloc[: , -1:].values
         x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
         # adaboost classifier
         clf5 = AdaBoostClassifier()
@@ -709,7 +716,7 @@ def generate_code(query, df):
         for feat in objList:
             df[feat] = le.fit_transform(df[feat].astype(str))
         x = df.iloc[:,:-1]
-        y = df.iloc[: , -1:]
+        y = df.iloc[: , -1:].values
         x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
         # adaboost classifier
         clf5 = AdaBoostClassifier()
@@ -739,7 +746,7 @@ def generate_code(query, df):
         for feat in objList:
             df[feat] = le.fit_transform(df[feat].astype(str))
         x = df.iloc[:,:-1]
-        y = df.iloc[: , -1:]
+        y = df.iloc[: , -1:].values
         x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
         # adaboost classifier
         clf5 = AdaBoostClassifier()
@@ -770,7 +777,7 @@ def generate_code(query, df):
         for feat in objList:
             df[feat] = le.fit_transform(df[feat].astype(str))
         x = df.iloc[:,:-1]
-        y = df.iloc[: , -1:]
+        y = df.iloc[: , -1:].values
         x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
         # gradient boosting
         clf6 = GradientBoostingClassifier()
@@ -800,7 +807,7 @@ def generate_code(query, df):
         for feat in objList:
             df[feat] = le.fit_transform(df[feat].astype(str))
         x = df.iloc[:,:-1]
-        y = df.iloc[: , -1:]
+        y = df.iloc[: , -1:].values
         x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
         # gradient boosting
         clf6 = GradientBoostingClassifier()
@@ -830,7 +837,7 @@ def generate_code(query, df):
         for feat in objList:
             df[feat] = le.fit_transform(df[feat].astype(str))
         x = df.iloc[:,:-1]
-        y = df.iloc[: , -1:]
+        y = df.iloc[: , -1:].values
         x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
         # gradient boosting
         clf6 = GradientBoostingClassifier()
@@ -864,7 +871,7 @@ def generate_code(query, df):
         for feat in objList:
             df[feat] = le.fit_transform(df[feat].astype(str))
         X = df.iloc[:,:-1]
-        Y = df.iloc[: , -1:]
+        Y = df.iloc[: , -1:].values
         x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.20, random_state=0)
         # Gaussian naive bayes
         clf = GaussianNB()
@@ -961,7 +968,7 @@ def generate_code(query, df):
         for feat in objList:
             df[feat] = le.fit_transform(df[feat].astype(str))
         X = df.iloc[:,:-1]
-        Y = df.iloc[: , -1:]
+        Y = df.iloc[: , -1:].values
         x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.20, random_state=0)
         # Gaussian naive bayes
         clf = GaussianNB()
@@ -1058,7 +1065,7 @@ def generate_code(query, df):
         for feat in objList:
             df[feat] = le.fit_transform(df[feat].astype(str))
         X = df.iloc[:,:-1]
-        Y = df.iloc[: , -1:]
+        Y = df.iloc[: , -1:].values
         x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.20, random_state=0)
         # Gaussian naive bayes
         clf = GaussianNB()
