@@ -12,9 +12,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import operator
 import re
-import dtale
 import sweetviz 
-
 from IPython.display import display
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
