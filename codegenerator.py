@@ -387,7 +387,7 @@ def generate_code(query, df):
         p4 = recall_score(y_test, y_pred, average='micro')
         p5 = f1_score(y_test, y_pred)
         report = pd.DataFrame()
-        report['Model'] = 'Gaussian Naive bayes' 
+        report['Model'] = ['Gaussian Naive bayes'] 
         report['Training Accuracy'] = [NBscore] 
         report['Test Accuracy'] = [p] 
         report['Confusion matrix'] = [p2] 
@@ -732,36 +732,7 @@ def generate_code(query, df):
         report['F1-score'] = [u5]
         z = report.to_html()
         return z
-    elif operator.contains(query, "boost"):
-        le = LabelEncoder()
-        objList = df.select_dtypes(include = "object").columns
-        print (objList)
-        for feat in objList:
-            df[feat] = le.fit_transform(df[feat].astype(str))
-        x = df.iloc[:,:-1]
-        y = df.iloc[: , -1:]
-        x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
-        # adaboost classifier
-        clf5 = AdaBoostClassifier()
-        clf5.fit(x_train, y_train)
-        adascore = clf5.score(x_train, y_train)
-        y_pred5=clf5.predict(x_test)
-        u = accuracy_score(y_test,y_pred5)
-        u1 = classification_report(y_test, y_pred5)
-        u2 = confusion_matrix(y_test, y_pred5)
-        u3 = precision_score(y_test, y_pred5, average="micro")
-        u4 = recall_score(y_test, y_pred5, average='micro')
-        u5 = f1_score(y_test, y_pred5)
-        report = pd.DataFrame()
-        report['Model'] = ['Adaboost']
-        report['Training Accuracy'] =[adascore]
-        report['Test Accuracy'] = [u]
-        report['Confusion matrix'] = [u2]
-        report['Precision'] = [u3]
-        report['Recall'] = [u4]
-        report['F1-score'] = [u5]
-        z = report.to_html()
-        return z
+    
 
     elif operator.contains(query, "gradient boosting"):
         le = LabelEncoder()
