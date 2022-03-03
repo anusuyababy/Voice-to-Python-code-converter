@@ -798,7 +798,7 @@ def generate_code(query, df):
         p5 = f1_score(y_test, y_pred)
         # random forest
         clf1 = RandomForestClassifier(n_estimators=20)
-        clf1.fit(x_train, y_train)
+        clf1.fit(x_train, y_train.values.ravel())
         rfscore = clf1.score(x_train, y_train)
         y_pred1=clf1.predict(x_test)
         q = accuracy_score(y_test,y_pred1)
