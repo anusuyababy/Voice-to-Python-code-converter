@@ -474,6 +474,36 @@ def generate_code(query, df):
         report['F1-score'] = [r5]
         z = report.to_html()
         return z
+     elif operator.contains(query, "KNN"):
+        le = LabelEncoder()
+        objList = df.select_dtypes(include = "object").columns
+        print (objList)
+        for feat in objList:
+            df[feat] = le.fit_transform(df[feat].astype(str))
+        x = df.iloc[:,:-1]
+        y = df.iloc[: , -1:]
+        x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
+        # KNN CLASSIFIER
+        clf2 = KNeighborsClassifier()
+        clf2.fit(x_train, y_train)
+        knnscore = clf2.score(x_train, y_train)
+        y_pred2=clf2.predict(x_test)
+        r = accuracy_score(y_test,y_pred2)
+        r1 = classification_report(y_test, y_pred2)
+        r2 = confusion_matrix(y_test, y_pred2)
+        r3 = precision_score(y_test, y_pred2, average="micro")
+        r4 = recall_score(y_test, y_pred2, average='micro')
+        r5 = f1_score(y_test, y_pred2)
+        report = pd.DataFrame()
+        report['Model'] = ['KNN'] 
+        report['Training Accuracy'] =[knnscore] 
+        report['Test Accuracy'] = [r]
+        report['Confusion matrix'] = [r2]
+        report['Precision'] = [r3]
+        report['Recall'] = [r4]
+        report['F1-score'] = [r5]
+        z = report.to_html()
+        return z
     elif operator.contains(query, "knn"):
         le = LabelEncoder()
         objList = df.select_dtypes(include = "object").columns
@@ -538,6 +568,36 @@ def generate_code(query, df):
 
 
     elif operator.contains(query, "svm"):
+        le = LabelEncoder()
+        objList = df.select_dtypes(include = "object").columns
+        print (objList)
+        for feat in objList:
+            df[feat] = le.fit_transform(df[feat].astype(str))
+        x = df.iloc[:,:-1]
+        y = df.iloc[: , -1:]
+        x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
+        # SVM Classifier
+        clf4 = svm.SVC()
+        clf4.fit(x_train, y_train)
+        svmscore = clf4.score(x_train, y_train)
+        y_pred4=clf4.predict(x_test)
+        t = accuracy_score(y_test,y_pred4)
+        t1 = classification_report(y_test, y_pred4)
+        t2 = confusion_matrix(y_test, y_pred4)
+        t3 = precision_score(y_test, y_pred4, average="micro")
+        t4 = recall_score(y_test, y_pred4, average='micro')
+        t5 = f1_score(y_test, y_pred4)
+        report = pd.DataFrame()
+        report['Model'] = ['SVM']
+        report['Training Accuracy'] =[svmscore]
+        report['Test Accuracy'] = [t]
+        report['Confusion matrix'] = [t2]
+        report['Precision'] = [t3]
+        report['Recall'] = [t4]
+        report['F1-score'] = [t5]
+        z = report.to_html()
+        return z
+    elif operator.contains(query, "SVM"):
         le = LabelEncoder()
         objList = df.select_dtypes(include = "object").columns
         print (objList)
