@@ -394,7 +394,7 @@ def generate_code(query, df):
         p4 = recall_score(y_test, y_pred, average='micro')
         p5 = f1_score(y_test, y_pred)
         report = pd.DataFrame()
-        report['Model'] = 'Gaussian Naive bayes' 
+        report['Model'] = ['Gaussian Naive bayes'] 
         report['Training Accuracy'] = [NBscore] 
         report['Test Accuracy'] = [p] 
         report['Confusion matrix'] = [p2] 
@@ -588,95 +588,7 @@ def generate_code(query, df):
         return z
 
 
-    elif operator.contains(query, "svm"):
-        le = LabelEncoder()
-        objList = df.select_dtypes(include = "object").columns
-        print (objList)
-        for feat in objList:
-            df[feat] = le.fit_transform(df[feat].astype(str))
-        x = df.iloc[:,:-1]
-        y = df.iloc[: , -1:].values
-        x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
-        # SVM Classifier
-        clf4 = svm.SVC()
-        clf4.fit(x_train, y_train.values.ravel())
-        svmscore = clf4.score(x_train, y_train)
-        y_pred4=clf4.predict(x_test)
-        t = accuracy_score(y_test,y_pred4)
-        t1 = classification_report(y_test, y_pred4)
-        t2 = confusion_matrix(y_test, y_pred4)
-        t3 = precision_score(y_test, y_pred4, average="micro")
-        t4 = recall_score(y_test, y_pred4, average='micro')
-        t5 = f1_score(y_test, y_pred4)
-        report = pd.DataFrame()
-        report['Model'] = ['SVM']
-        report['Training Accuracy'] =[svmscore]
-        report['Test Accuracy'] = [t]
-        report['Confusion matrix'] = [t2]
-        report['Precision'] = [t3]
-        report['Recall'] = [t4]
-        report['F1-score'] = [t5]
-        z = report.to_html()
-        return z
-    elif operator.contains(query, "SVM"):
-        le = LabelEncoder()
-        objList = df.select_dtypes(include = "object").columns
-        print (objList)
-        for feat in objList:
-            df[feat] = le.fit_transform(df[feat].astype(str))
-        x = df.iloc[:,:-1]
-        y = df.iloc[: , -1:].values
-        x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
-        # SVM Classifier
-        clf4 = svm.SVC()
-        clf4.fit(x_train, y_train.values.ravel())
-        svmscore = clf4.score(x_train, y_train)
-        y_pred4=clf4.predict(x_test)
-        t = accuracy_score(y_test,y_pred4)
-        t1 = classification_report(y_test, y_pred4)
-        t2 = confusion_matrix(y_test, y_pred4)
-        t3 = precision_score(y_test, y_pred4, average="micro")
-        t4 = recall_score(y_test, y_pred4, average='micro')
-        t5 = f1_score(y_test, y_pred4)
-        report = pd.DataFrame()
-        report['Model'] = ['SVM']
-        report['Training Accuracy'] =[svmscore]
-        report['Test Accuracy'] = [t]
-        report['Confusion matrix'] = [t2]
-        report['Precision'] = [t3]
-        report['Recall'] = [t4]
-        report['F1-score'] = [t5]
-        z = report.to_html()
-        return z
-    elif operator.contains(query, "Svm"):
-        le = LabelEncoder()
-        objList = df.select_dtypes(include = "object").columns
-        print (objList)
-        for feat in objList:
-            df[feat] = le.fit_transform(df[feat].astype(str))
-        x = df.iloc[:,:-1]
-        y = df.iloc[: , -1:].values
-        x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
-        # SVM Classifier
-        clf4 = svm.SVC()
-        clf4.fit(x_train, y_train.values.ravel())
-        svmscore = clf4.score(x_train, y_train)
-        y_pred4=clf4.predict(x_test)
-        t = accuracy_score(y_test,y_pred4)
-        t1 = classification_report(y_test, y_pred4)
-        t2 = confusion_matrix(y_test, y_pred4)
-        t3 = precision_score(y_test, y_pred4, average="micro")
-        t4 = recall_score(y_test, y_pred4, average='micro')
-        t5 = f1_score(y_test, y_pred4)
-        report = pd.DataFrame()
-        report['Model'] = ['SVM']
-        report['Training Accuracy'] =[svmscore]
-        report['Test Accuracy'] = [t]
-        report['Confusion matrix'] = [t2]
-        report['Precision'] = [t3]
-        report['Recall'] = [t4]
-        report['F1-score'] = [t5]
-        z = report.to_html()
+    
         return z
 
     elif operator.contains(query, "adaboost"):
@@ -870,12 +782,12 @@ def generate_code(query, df):
         print (objList)
         for feat in objList:
             df[feat] = le.fit_transform(df[feat].astype(str))
-        X = df.iloc[:,:-1]
-        Y = df.iloc[: , -1:].values
-        x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.20, random_state=0)
+        x = df.iloc[:,:-1]
+        y = df.iloc[: , -1:]
+        x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
         # Gaussian naive bayes
         clf = GaussianNB()
-        clf.fit(x_train, y_train.values.ravel())
+        clf.fit(x_train, y_train)
         NBscore = clf.score(x_train, y_train)
         y_pred=clf.predict(x_test)
         p = accuracy_score(y_test,y_pred)
@@ -886,7 +798,7 @@ def generate_code(query, df):
         p5 = f1_score(y_test, y_pred)
         # random forest
         clf1 = RandomForestClassifier(n_estimators=20)
-        clf1.fit(x_train, y_train.values.ravel())
+        clf1.fit(x_train, y_train)
         rfscore = clf1.score(x_train, y_train)
         y_pred1=clf1.predict(x_test)
         q = accuracy_score(y_test,y_pred1)
@@ -897,7 +809,7 @@ def generate_code(query, df):
         q5 = f1_score(y_test, y_pred1)
         # KNN Classifier
         clf2 = KNeighborsClassifier()
-        clf2.fit(x_train, y_train.values.ravel())
+        clf2.fit(x_train, y_train)
         knnscore = clf2.score(x_train, y_train)
         y_pred2=clf2.predict(x_test)
         r = accuracy_score(y_test,y_pred2)
@@ -908,7 +820,7 @@ def generate_code(query, df):
         r5 = f1_score(y_test, y_pred2)
         # Decision tree classifier
         clf3 = DecisionTreeClassifier()
-        clf3.fit(x_train, y_train.values.ravel())
+        clf3.fit(x_train, y_train)
         dtscore = clf3.score(x_train, y_train)
         y_pred3=clf3.predict(x_test)
         s = accuracy_score(y_test,y_pred3)
@@ -919,7 +831,7 @@ def generate_code(query, df):
         s5 = f1_score(y_test, y_pred3)
         # SVM Classifier
         clf4 = svm.SVC()
-        clf4.fit(x_train, y_train.values.ravel())
+        clf4.fit(x_train, y_train)
         svmscore = clf4.score(x_train, y_train)
         y_pred4=clf4.predict(x_test)
         t = accuracy_score(y_test,y_pred4)
@@ -930,7 +842,7 @@ def generate_code(query, df):
         t5 = f1_score(y_test, y_pred4)
         # adaboost classifier
         clf5 = AdaBoostClassifier()
-        clf5.fit(x_train, y_train.values.ravel())
+        clf5.fit(x_train, y_train)
         adascore = clf5.score(x_train, y_train)
         y_pred5=clf5.predict(x_test)
         u = accuracy_score(y_test,y_pred5)
@@ -941,7 +853,7 @@ def generate_code(query, df):
         u5 = f1_score(y_test, y_pred5)
         # gradient boosting
         clf6 = GradientBoostingClassifier()
-        clf6.fit(x_train, y_train.values.ravel())
+        clf6.fit(x_train, y_train)
         gradientscore = clf6.score(x_train, y_train)
         y_pred6=clf6.predict(x_test)
         v = accuracy_score(y_test,y_pred6)
@@ -967,12 +879,12 @@ def generate_code(query, df):
         print (objList)
         for feat in objList:
             df[feat] = le.fit_transform(df[feat].astype(str))
-        X = df.iloc[:,:-1]
-        Y = df.iloc[: , -1:].values
-        x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.20, random_state=0)
+        x = df.iloc[:,:-1]
+        y = df.iloc[: , -1:]
+        x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
         # Gaussian naive bayes
         clf = GaussianNB()
-        clf.fit(x_train, y_train.values.ravel())
+        clf.fit(x_train, y_train)
         NBscore = clf.score(x_train, y_train)
         y_pred=clf.predict(x_test)
         p = accuracy_score(y_test,y_pred)
@@ -983,7 +895,7 @@ def generate_code(query, df):
         p5 = f1_score(y_test, y_pred)
         # random forest
         clf1 = RandomForestClassifier(n_estimators=20)
-        clf1.fit(x_train, y_train.values.ravel())
+        clf1.fit(x_train, y_train)
         rfscore = clf1.score(x_train, y_train)
         y_pred1=clf1.predict(x_test)
         q = accuracy_score(y_test,y_pred1)
@@ -994,7 +906,7 @@ def generate_code(query, df):
         q5 = f1_score(y_test, y_pred1)
         # KNN Classifier
         clf2 = KNeighborsClassifier()
-        clf2.fit(x_train, y_train.values.ravel())
+        clf2.fit(x_train, y_train)
         knnscore = clf2.score(x_train, y_train)
         y_pred2=clf2.predict(x_test)
         r = accuracy_score(y_test,y_pred2)
@@ -1005,7 +917,7 @@ def generate_code(query, df):
         r5 = f1_score(y_test, y_pred2)
         # Decision tree classifier
         clf3 = DecisionTreeClassifier()
-        clf3.fit(x_train, y_train.values.ravel())
+        clf3.fit(x_train, y_train)
         dtscore = clf3.score(x_train, y_train)
         y_pred3=clf3.predict(x_test)
         s = accuracy_score(y_test,y_pred3)
@@ -1016,7 +928,7 @@ def generate_code(query, df):
         s5 = f1_score(y_test, y_pred3)
         # SVM Classifier
         clf4 = svm.SVC()
-        clf4.fit(x_train, y_train.values.ravel())
+        clf4.fit(x_train, y_train)
         svmscore = clf4.score(x_train, y_train)
         y_pred4=clf4.predict(x_test)
         t = accuracy_score(y_test,y_pred4)
@@ -1027,7 +939,7 @@ def generate_code(query, df):
         t5 = f1_score(y_test, y_pred4)
         # adaboost classifier
         clf5 = AdaBoostClassifier()
-        clf5.fit(x_train, y_train.values.ravel())
+        clf5.fit(x_train, y_train)
         adascore = clf5.score(x_train, y_train)
         y_pred5=clf5.predict(x_test)
         u = accuracy_score(y_test,y_pred5)
@@ -1038,7 +950,7 @@ def generate_code(query, df):
         u5 = f1_score(y_test, y_pred5)
         # gradient boosting
         clf6 = GradientBoostingClassifier()
-        clf6.fit(x_train, y_train.values.ravel())
+        clf6.fit(x_train, y_train)
         gradientscore = clf6.score(x_train, y_train)
         y_pred6=clf6.predict(x_test)
         v = accuracy_score(y_test,y_pred6)
@@ -1064,12 +976,12 @@ def generate_code(query, df):
         print (objList)
         for feat in objList:
             df[feat] = le.fit_transform(df[feat].astype(str))
-        X = df.iloc[:,:-1]
-        Y = df.iloc[: , -1:].values
-        x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.20, random_state=0)
+        x = df.iloc[:,:-1]
+        y = df.iloc[: , -1:]
+        x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random_state=0)
         # Gaussian naive bayes
         clf = GaussianNB()
-        clf.fit(x_train, y_train.values.ravel())
+        clf.fit(x_train, y_train)
         NBscore = clf.score(x_train, y_train)
         y_pred=clf.predict(x_test)
         p = accuracy_score(y_test,y_pred)
@@ -1080,7 +992,7 @@ def generate_code(query, df):
         p5 = f1_score(y_test, y_pred)
         # random forest
         clf1 = RandomForestClassifier(n_estimators=20)
-        clf1.fit(x_train, y_train.values.ravel())
+        clf1.fit(x_train, y_train)
         rfscore = clf1.score(x_train, y_train)
         y_pred1=clf1.predict(x_test)
         q = accuracy_score(y_test,y_pred1)
@@ -1091,7 +1003,7 @@ def generate_code(query, df):
         q5 = f1_score(y_test, y_pred1)
         # KNN Classifier
         clf2 = KNeighborsClassifier()
-        clf2.fit(x_train, y_train.values.ravel())
+        clf2.fit(x_train, y_train)
         knnscore = clf2.score(x_train, y_train)
         y_pred2=clf2.predict(x_test)
         r = accuracy_score(y_test,y_pred2)
@@ -1102,7 +1014,7 @@ def generate_code(query, df):
         r5 = f1_score(y_test, y_pred2)
         # Decision tree classifier
         clf3 = DecisionTreeClassifier()
-        clf3.fit(x_train, y_train.values.ravel())
+        clf3.fit(x_train, y_train)
         dtscore = clf3.score(x_train, y_train)
         y_pred3=clf3.predict(x_test)
         s = accuracy_score(y_test,y_pred3)
@@ -1113,7 +1025,7 @@ def generate_code(query, df):
         s5 = f1_score(y_test, y_pred3)
         # SVM Classifier
         clf4 = svm.SVC()
-        clf4.fit(x_train, y_train.values.ravel())
+        clf4.fit(x_train, y_train)
         svmscore = clf4.score(x_train, y_train)
         y_pred4=clf4.predict(x_test)
         t = accuracy_score(y_test,y_pred4)
@@ -1124,7 +1036,7 @@ def generate_code(query, df):
         t5 = f1_score(y_test, y_pred4)
         # adaboost classifier
         clf5 = AdaBoostClassifier()
-        clf5.fit(x_train, y_train.values.ravel())
+        clf5.fit(x_train, y_train)
         adascore = clf5.score(x_train, y_train)
         y_pred5=clf5.predict(x_test)
         u = accuracy_score(y_test,y_pred5)
@@ -1135,7 +1047,7 @@ def generate_code(query, df):
         u5 = f1_score(y_test, y_pred5)
         # gradient boosting
         clf6 = GradientBoostingClassifier()
-        clf6.fit(x_train, y_train.values.ravel())
+        clf6.fit(x_train, y_train)
         gradientscore = clf6.score(x_train, y_train)
         y_pred6=clf6.predict(x_test)
         v = accuracy_score(y_test,y_pred6)
