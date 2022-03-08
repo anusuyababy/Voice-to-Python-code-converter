@@ -1,143 +1,299 @@
-﻿
+﻿<html>
 
-
-
-
-
-
-
-
-<html>
 <head>
-<title>Speech To Code Converter</title>
-		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css" />
-		<style type="text/css">
-			body{
-				font-family: verdana;
-				 width: 100%;
-				 background-image: url("bg.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  
-    			overflow-x: hidden;
-			}
-			.spinner{
-    width: 80px;
-    height: 80px;
-    
-    border: 2px solid #f3f3f3;
-    border-top:3px solid #f25a41;
-    border-radius: 100%;
-    
-    position: absolute;
-    top:0;
-    bottom:0;
-    left:0;
-    right: 0;
-    margin: auto;
-    
-    animation: spin 1s infinite linear;
-}
-			#result{
-				height: 270px;
-				background-color: #adaaaa;
-				box-shadow: 0 0 10px 0 #bbb;
-				margin-bottom: 30px;
-				font-size: 14px;
-				line-height: 25px;
-			}
-			button-con {
-  position: relative;
-  border: 1px solid currentColor;
-  font-size: 1.1rem;
-  color: #4f93ce;
-  margin: 3rem 0;
-  padding: 0.75rem 3rem;
-  cursor: pointer;
-  -webkit-transition: background-color 0.28s ease, color 0.28s ease, box-shadow 0.28s ease;
-  transition: background-color 0.28s ease, color 0.28s ease, box-shadow 0.28s ease;
-  overflow: hidden;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-		</style>
+	<title>Speech To Code Converter</title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,600;1,200&display=swap" rel="stylesheet">
+	<style type="text/css">
+		*, *:before, *:after {
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+		body, * {
+			/* font-family: 'Smooch Sans', sans-serif; */
+			font-family: 'Exo 2', sans-serif;
+			font-weight: 400;
+			font-size: 20px;
+		}
+		body {
+			background-color: white;
+			width: 100%;
+			margin: 0;
+			text-align: center;
+		}
+
+		.spinner {
+			width: 80px;
+			height: 80px;
+			border: 2px solid #f3f3f3;
+			border-top: 3px solid #f25a41;
+			border-radius: 100%;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			margin: auto;
+			animation: spin 1s infinite linear;
+		}
+
+		#result {
+			height: 270px;
+			margin-bottom: 30px;
+			font-size: 14px;
+			line-height: 25px;
+		}
+
+		.header {
+			background: #2980b9;
+			color: white;
+			padding: 20px 0px;
+		}
+
+		button-con {
+			position: relative;
+			border: 1px solid currentColor;
+			font-size: 1.1rem;
+			color: #4f93ce;
+			margin: 3rem 0;
+			padding: 0.75rem 3rem;
+			cursor: pointer;
+			overflow: hidden;
+		}
+		.head-title{
+			font-size: 30px;
+			font-weight: 600;
+		}
+		.head-subtitle{
+			font-size: 20px;
+		}
+		.btn-btn-primary{
+			color: #fff;
+			width: 180px;
+			height: 40px;
+			padding-bottom: 5px;
+			background-color: #2980b9;
+			font-weight: 400;
+    		text-align: center;
+			border-radius: 20px;
+			border: none;
+			cursor: pointer;
+		}
+		div.row {
+			position: relative;
+			width: 645px;
+		}
+		div.row input {
+			width: 370px;
+		}
+		div.row label {
+			display: inline-block;
+			width: 170px;
+    		text-align: right;
+		}
+		.custom-file-input::-webkit-file-upload-button {
+			visibility: hidden;
+		}
+		.custom-file-input::before {
+			content: 'Select your dataset file..';
+			display: inline-block;
+			background: white;
+			padding: 10px 10px;
+			outline: none;
+			white-space: nowrap;
+			-webkit-user-select: none;
+			cursor: pointer;
+			text-shadow: 1px 1px #fff;
+			font-weight: 700;
+			font-size: 10pt;
+		}
+		.custom-file-input:hover::before {
+			border-color: black;
+		}
+		.custom-file-input:active::before {
+			background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+		}
+		.speech-btns{
+			position: absolute;
+			z-index: 999;
+			width: 50px;
+			height: 38px;
+			background-color: #e74c3c;
+			color: white;
+			border: 0px solid #2980b936;
+			outline: none;
+			white-space: nowrap;
+			-webkit-user-select: none;
+			cursor: pointer;
+			text-shadow: 1px 1px #fff;
+			font-weight: 700;
+			font-size: 16pt;
+			padding-top: 0;
+			padding-bottom: 3px;
+			border-top-right-radius: 5px;
+			border-bottom-right-radius: 5px;
+    		right: 50px;
+		}
+		.speech-input{
+			display: inline-block;
+			background: white;
+			border: 1px solid #2980b936;
+			border-radius: 3px;
+			padding: 10px 10px;
+			outline: none;
+			white-space: nowrap;
+			-webkit-user-select: none;
+			text-shadow: 1px 1px #fff;
+			font-weight: 700;
+			font-size: 10pt;
+    		padding-right: 103px;
+		}
+		.fst-input{
+			background: white;
+			border: 1px solid #2980b936;
+			border-radius: 3px;
+			padding: 2px 10px;
+			outline: none;
+			white-space: nowrap;
+			-webkit-user-select: none;
+			cursor: pointer;
+			text-shadow: 1px 1px #fff;
+			font-weight: 700;
+			font-size: 10pt;
+		}
+		.recordings i{
+			opacity: 0;
+		}
+		.secd{
+			right: 100px;
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+			background-color: #2980b9;
+		}
+		.lds-ripple {
+			display: none;
+			position: relative;
+			width: 40px;
+    		height: 38px;
+		}
+		.recordings .lds-ripple{
+			display: inline-block;
+		}
+		.lds-ripple div {
+			position: absolute;
+			border: 4px solid #fff;
+			opacity: 1;
+			border-radius: 50%;
+			animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+		}
+		.lds-ripple div:nth-child(2) {
+			animation-delay: -0.5s;
+		}
+		@keyframes lds-ripple {
+		0% {
+			top: 18px;
+			left: 18px;
+			width: 0;
+			height: 0;
+			opacity: 1;
+		}
+		100% {
+			top: 0px;
+			left: 0px;
+			width: 36px;
+			height: 36px;
+			opacity: 0;
+		}
+		}
+	</style>
 </head>
-   <body bgcolor ="#c2bebe">
-   	<center></center>
-  <h1 align="center"><span style="color: #383635">Speech to Code Converter </span><br><span style="font-size: 20px;color: black; font-weight: lighter;"></span></h1>
-  <center>Converting Speech Input To Text</center></br>
 
-		<div id="result" align="center">
-			<br>
-		 <label style="font-size: 15px; color: black">Speech Input:</label>
-      <form action = {{ url_for('result') }} method = "POST" enctype="multipart/form-data">
-      <label for="myfile">Select a file:</label>
-        <input type="file" id="myfile" name="myfile" /><br/><br/>
-          <input type="hidden" id="filename" name="filename" value="{{ filename|safe }}" /><br/><br/>
-
-        <input type="text" id="result1" size="40" maxlength=100 name = "Name" /><br/><br/>
-        <button type = "button" style="position:absolute; left:48%;" onclick="startConverting();"><i class="fa fa-microphone"></i></button>
-		<!-- click this button to stop converting-->
-		<button type = "button" style="position:absolute; left:51%;" onclick="stopConverting();"><i class="fa fa-remove"></i></button>
-	<br/>
-         <p><input type = "submit" value = "submit" /></p>
-         <br/><br/>
-          <div style="width: 100%;margin: 0;">
-           {{ result|safe }}
-          </div>
-          
-                       
-
-         
-      </form>
-
-      
-         
-      
-      
+<body>
+	<div class="header">
+		<h1 class="head-title">Speech to Code Converter </span></h1>
+		<p class="head-subtitle">Converting Speech Input To Text</p>
+	</div>
+	<div id="result" align="center"><br /><br />
+		<form action={{ url_for('result') }} method="POST" enctype="multipart/form-data">
+			<div class="row" >
+				<label for="myfile">Select Dataset:</label>
+				<input type="file" id="myfile" name="myfile" class="custom-file-input fst-input" />
+			</div>
+			<input type="hidden" id="filename" name="filename" value="{{ filename|safe }}" /><br /><br />
+			<div class="row" >
+				<label>Speech Input:</label>
+				<input type="text" id="result1" size="40" maxlength=100 name="Name" class="speech-input" />
+				<button type="button" class="speech-btns secd" onclick="startConverting();" id="micro"><div class="lds-ripple"><div></div><div></div></div><i class="fa fa-microphone" ></i></button>
+				<button type="button" class="speech-btns" onclick="stopConverting();"><i class="fa fa-remove"></i></button>
+			</div><br />
+			<br />
+			<input type="submit" value="submit" class="btn-btn-primary" />
+			<br /><br />
+			<div style="width: 100%;margin: 0;">{{ result|safe }}</div>
+		</form>
 		<script type="text/javascript">
-		
-		var overlay = document.getElementById("overlay");
-		
-		
+			var overlay = document.getElementById("overlay");
 			var r = document.getElementById('result1');
-			var speechRecognizer = new webkitSpeechRecognition();// a new speech recognition object
-			
-			//function to start listening to voice and then convert it to text
-			function startConverting () {
-				if('webkitSpeechRecognition' in window){
-					
+			var micro = document.getElementById("micro");
+			var speechRecognizer = new webkitSpeechRecognition();
+			let timer = null;
+			let started = false;
+			function startConverting() {
+				if(started){
+					speechRecognizer.stop();
+					micro.classList.toggle("recordings");
+					return;
+				}
+				started = true;
+				if ('webkitSpeechRecognition' in window) {
 					speechRecognizer.continuous = true;
 					speechRecognizer.interimResults = true;
 					speechRecognizer.lang = 'en-IN';
 					speechRecognizer.start();
+					micro.classList.toggle("recordings");
 					var finalTranscripts = '';
-					speechRecognizer.onresult = function(event){
+					speechRecognizer.onresult = function (event) {
 						var interimTranscripts = '';
-						for(var i = event.resultIndex; i < event.results.length; i++){
+						for (var i = event.resultIndex; i < event.results.length; i++) {
 							var transcript = event.results[i][0].transcript;
 							transcript.replace("\n", "<br>");
-							if(event.results[i].isFinal){
+							if (event.results[i].isFinal) {
 								finalTranscripts += transcript;
-							}else{
+							} else {
 								interimTranscripts += transcript;
 							}
 						}
-						r.value = finalTranscripts + interimTranscripts ;
+
+						let fText = finalTranscripts + interimTranscripts;
+						r.value = fText;
+
+						if(timer){
+							clearTimeout(timer);
+						}
+						if(fText.indexOf('.') > -1){
+							speechRecognizer.stop();
+							micro.classList.toggle("recordings");
+						} else {
+							timer = setTimeout(function() {
+								speechRecognizer.stop();
+								micro.classList.toggle("recordings");
+							}, 2000);
+						}
 					};
-					speechRecognizer.onerror = function (event) {
-					};
-				}else{
-					r.innerHTML = 'No browser support. Please upgrade your browser';
+					speechRecognizer.onerror = function (event) {};
+				} else {
+					r.value = 'No browser support. Please upgrade your browser';
 				}
 			}
 			//function to stop listening
-			function stopConverting()
-			{
+			function stopConverting() {
 				speechRecognizer.stop();
+				micro.classList.toggle("recordings");
 			}
-		
 		</script>
-		<br>
-    </br>
-    <p style="text-align: center; color: #ea5703"</p>
-   </body>
+	</body>
 </html>
